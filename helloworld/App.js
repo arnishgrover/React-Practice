@@ -1,49 +1,72 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {
+  Platform, 
+  StyleSheet, 
+  TextInput, 
+  View,
+  Text,
+  Button
+} from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component {
+  constructor(props) {
+      super();
+      this.state = {
+        color: 'red'
+      }
+      this.clickHandler = this.clickHandler.bind(this);
+  }
 
-type Props = {};
-export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <View style={styles.form}>
+          <Text style = {styles.text}> Enter Username </Text>
+          <TextInput style={styles.textInputStyle} />
+
+          <Text style = {styles.text}> Enter Password </Text>
+          <TextInput style={styles.textInputStyle}/>
+          
+          <Button onPress={this.clickHandler} title="Submit" color={this.state.color}/>
+
+       
+        </View>
+        
       </View>
     );
   }
+  clickHandler = () => {
+    if(this.state.color == 'blue') {
+      this.setState({color: 'red'});
+    }
+    else {
+      this.setState({color: 'blue'});
+    }
+  }
+ 
 }
 
 const styles = StyleSheet.create({
+  textInputStyle: {
+    
+    backgroundColor: 'black',
+    color: 'white'
+    
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  form: {
+    flex: 1,
+    padding: 25,
+    
+    justifyContent: 'center', 
+    backgroundColor: 'white'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  text : {
+    fontSize: 15,
+    color: 'black'
+  }
 });
